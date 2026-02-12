@@ -8,7 +8,7 @@ public interface ResponseMessage {
     String VALIDATION_FAILED= "Validation failed.";
     String DUPLICATE_EMAIL = "Duplicate email.";
     String DUPLICATE_NICKNAME = "Duplicate nickname.";
-    String DUPLICATE_TEL_NUMBER = "Duplicate tel number.";
+    
     String NOT_EXIST_USER = "This user does not exist.";
     String NOT_EXIST_TODO = "This Todo does not exist.";
     //HTTP Status 401   
