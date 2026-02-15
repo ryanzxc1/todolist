@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+    db:
+        image: mysql:8.0
+        container_name: mysql-db-todolist
+        restart: unless-stopped
+        environment:
+            - MYSQL_DATABASE=todolist
+            - MYSQL_ROOT_PASSWORD=${DB_PASSWORD}
+        ports:
+            - "3306:3306"
+
+    backend:
+        build: ./back
+        container_name: spring_api
+        restart: unless-stopped
+        depends_on:
+            - db
+        ports:
+            - "5000:5000"
+        environment:
+            DB_URL: jdbc:mysql://db:3306/todolist?serverTimezone=UTC&characterEncoding=UTF-8
+            DB_USERNAME: root
+            DB_PASSWORD: ${DB_PASSWORD}
+            JWT_SECRET: ${JWT_SECRET}
+
+
+    frontend:
+        build: ./front
+        container_name: react_app
+        restart: unless-stopped
+        depends_on:
+            - backend
+        ports:
+            - "80:80"
+
+# docker compose stop 하면 restart:alayws여도 꺼짐
+# docker-compose up --build
