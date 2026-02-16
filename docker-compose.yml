@@ -13,6 +13,8 @@ services:
 
     backend:
         build: ./back
+        env_file:
+            - .env
         container_name: spring_api
         restart: unless-stopped
         depends_on:
